@@ -130,6 +130,7 @@ const SearchResults = () => {
     default:
       return "/";
   }
+  
 };
 
 export default SearchResults;
