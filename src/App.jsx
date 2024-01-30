@@ -6,11 +6,10 @@ import SearchResults from "./Components/SearchResults";
 import { useState } from "react";
 import Header from "./Components/Header";
 import { Links } from "./Components/Links";
-import { useSearchContext } from "./Contexts/ResultContextProvider";
+
 
 function App() {
   const [darkTheme, setDarkTheme] = useState(false);
-  const { query } = useSearchContext();
 
   return (
     <div
