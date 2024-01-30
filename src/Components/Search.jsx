@@ -1,6 +1,5 @@
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useSearchContext } from "../Contexts/ResultContextProvider";
-import { useDebounce } from "use-debounce";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
