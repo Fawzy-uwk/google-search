@@ -6,19 +6,19 @@ import { useEffect } from "react";
 
 /* eslint-disable react/prop-types */
 const SearchResults = () => {
-  const { results, loading, getResults, query } = useSearchContext();
+  const { results, loading, getResults, query, text } = useSearchContext();
   const location = useLocation();
   const navigate = useNavigate();
-
+  
   useEffect(() => {
-    if (query !== "") {
+    if (query !== "" || text !== "") {
       if (location.pathname === "/videos") {
         getResults(`/videos?q=${query}`);
       } else {
         getResults(`${location.pathname}?q=${query}&num=40`);
       }
     } else navigate("/");
-  }, [query, location.pathname]);
+  }, [query, location.pathname, navigate, text]);
 
   if (loading) return <Spinner />;
 
@@ -130,7 +130,6 @@ const SearchResults = () => {
     default:
       return "/";
   }
-  
 };
 
 export default SearchResults;

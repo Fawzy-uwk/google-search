@@ -1,15 +1,10 @@
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useSearchContext } from "../Contexts/ResultContextProvider";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 function Search() {
-  const { setQuery } = useSearchContext();
-  const [text, setText] = useState(() => {
-    // Retrieve the input value from localStorage when the component mounts
-    return localStorage.getItem("searchInput") || "";
-  });
-
+  const { setQuery, text, setText } = useSearchContext();
   const navigate = useNavigate();
 
   const HandleSubmit = (e) => {

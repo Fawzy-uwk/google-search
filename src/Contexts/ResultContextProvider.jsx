@@ -1,4 +1,4 @@
-import  { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const SearchContext = createContext();
 const baseUrl = "https://google.serper.dev";
@@ -8,6 +8,10 @@ export const ResultsContextProvider = ({ children }) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
+  const [text, setText] = useState(() => {
+    // Retrieve the input value from localStorage when the component mounts
+    return localStorage.getItem("searchInput") || "";
+  });
 
   const getResults = async (url) => {
     setLoading(true);
@@ -21,14 +25,14 @@ export const ResultsContextProvider = ({ children }) => {
     });
 
     const data = await res.json();
-   
+
     setResults(data);
     setLoading(false);
   };
 
   return (
     <SearchContext.Provider
-      value={{ getResults, results, query, setQuery, loading }}
+      value={{ getResults, results, query, text, setText, setQuery, loading }}
     >
       {children}
     </SearchContext.Provider>

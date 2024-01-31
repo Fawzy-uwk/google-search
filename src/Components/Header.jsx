@@ -3,12 +3,17 @@ import { Link, useLocation } from "react-router-dom";
 import Search from "./Search";
 
 /* eslint-disable react/prop-types */
-const Header = ({ setDarkTheme, darkTheme }) => {
+const Header = ({ setDarkTheme, darkTheme, text, setText }) => {
   const location = useLocation();
-  
 
   return (
-    <header className={location.pathname!==""?"w-full md:px-10 px-4 py-2 flex items-center justify-between border-b-2 dark:border-b-slate-800 flex-wrap gap-2 border-b-slate-300":"w-full md:px-10 px-2  py-2 flex items-center justify-center md:justify-between border-b-2 dark:border-b-slate-800 flex-wrap gap-2 border-b-slate-300"}>
+    <header
+      className={
+        location.pathname !== ""
+          ? "w-full md:px-10 px-4 py-2 flex items-center justify-between border-b-2 dark:border-b-slate-800 flex-wrap gap-2 border-b-slate-300"
+          : "w-full md:px-10 px-2  py-2 flex items-center justify-center md:justify-between border-b-2 dark:border-b-slate-800 flex-wrap gap-2 border-b-slate-300"
+      }
+    >
       <Link to="/" className="text-3xl text-sky-950 font-semibold">
         Google
       </Link>
@@ -16,7 +21,9 @@ const Header = ({ setDarkTheme, darkTheme }) => {
       {(location.pathname === "/search" ||
         location.pathname === "/news" ||
         location.pathname === "/images" ||
-        location.pathname === "/videos") && <Search />}
+        location.pathname === "/videos") && (
+        <Search text={text} setText={setText} />
+      )}
       <div
         onClick={() => setDarkTheme((dark) => !dark)}
         className="flex items-center gap-2 justify-center cursor-pointer"
