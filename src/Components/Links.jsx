@@ -14,20 +14,22 @@ export const Links = () => {
       location.pathname === "/news" ||
       location.pathname === "/images" ||
       location.pathname === "/videos") && (
-      <div className="flex gap-4 w-full md:w-[1000px] md:ml-auto my-8 ml-8 items-center mt-4">
-        {links.map(({ url, text }) => (
-          <NavLink
-            to={url}
-            key={url}
-            className={({ isActive }) =>
-              !isActive
-                ? ""
-                : "text-blue-700 border-b-2 dark:text-blue-300 border-blue-700 pb-2"
-            }
-          >
-            {text}
-          </NavLink>
-        ))}
+      <div className="w-full flex items-center justify-center ml-auto my-8 mt-4" >
+        <div className="flex gap-4 items-center ">
+          {links.map(({ url, text }) => (
+            <NavLink
+              to={url}
+              key={url}
+              className={({ isActive }) =>
+                !isActive
+                  ? ""
+                  : "text-blue-700 border-b-2 dark:text-blue-300 border-blue-700 pb-2"
+              }
+            >
+              {text}
+            </NavLink>
+          ))}
+        </div>
       </div>
     )
   );

@@ -1,28 +1,40 @@
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useSearchContext } from "../Contexts/ResultContextProvider";
-import { useEffect } from "react";
+
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 function Search() {
   const { setQuery, text, setText } = useSearchContext();
   const navigate = useNavigate();
 
-  const HandleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    // Update localStorage and setQuery only when the form is submitted
+    localStorage.setItem("searchInput", text);
     setQuery(text);
     navigate("search");
   };
 
-  // Update localStorage with the input value whenever it changes
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmit(e);
+    }
+  };
+
   useEffect(() => {
-    localStorage.setItem("searchInput", text);
-    setQuery(text);
-  }, [text, setQuery]);
+    const savedQuery = localStorage.getItem("searchInput");
+    if (savedQuery) {
+      setText(savedQuery);
+      setQuery(savedQuery);
+     
+    }
+  }, [navigate, setQuery, setText]);
 
   return (
     <form
       className="flex items-center w-[20rem] sm:w-[35rem] gap-2 p-3 bg-gray-200 dark:bg-white rounded-full relative"
-      onSubmit={HandleSubmit}
+      onSubmit={handleSubmit}
     >
       <FaSearch color="gray" />
       <input
@@ -32,14 +44,16 @@ function Search() {
         id="query"
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onKeyDown={handleKeyDown} // Add the onKeyDown event handler
       />
       {text !== "" && (
         <button
           type="button"
-          className="absolute top-4 right-4 text-2xl text-gray-500 "
+          className="absolute top-4 right-4 cursor-pointer text-2xl text-gray-500"
           onClick={() => {
             setText("");
             setQuery("");
+            localStorage.removeItem("searchInput");
           }}
         >
           <FaTimes color="black" size={20} />

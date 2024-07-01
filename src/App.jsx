@@ -10,7 +10,6 @@ import { Links } from "./Components/Links";
 
 function App() {
   const [darkTheme, setDarkTheme] = useState(false);
-  
 
   return (
     <div
@@ -29,9 +28,9 @@ function App() {
             <Route path="/videos" element={<SearchResults />} />
             <Route path="*" element={<Home />} />
           </Routes>
-          <Footer />
         </BrowserRouter>
       </div>
+      <Footer />
     </div>
   );
 }

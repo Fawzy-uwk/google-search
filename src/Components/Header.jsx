@@ -1,6 +1,7 @@
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import Search from "./Search";
+import google from "../assets/google.svg";
 
 /* eslint-disable react/prop-types */
 const Header = ({ setDarkTheme, darkTheme, text, setText }) => {
@@ -10,12 +11,12 @@ const Header = ({ setDarkTheme, darkTheme, text, setText }) => {
     <header
       className={
         location.pathname !== ""
-          ? "w-full md:px-10 px-4 py-2 flex items-center justify-between border-b-2 dark:border-b-slate-800 flex-wrap gap-2 border-b-slate-300"
-          : "w-full md:px-10 px-2  py-2 flex items-center justify-center md:justify-between border-b-2 dark:border-b-slate-800 flex-wrap gap-2 border-b-slate-300"
+          ? "w-full md:px-10 px-4 py-3 flex items-center justify-between border-b-2 dark:border-b-slate-800 flex-wrap gap-2 border-b-slate-300"
+          : "w-full md:px-10 px-2  py-3 flex items-center justify-center md:justify-between border-b-2 dark:border-b-slate-800 flex-wrap gap-2 border-b-slate-300"
       }
     >
       <Link to="/" className="text-3xl text-sky-950 font-semibold">
-        Google
+        <img src={google} className="h-10 w-full"/>
       </Link>
 
       {(location.pathname === "/search" ||
