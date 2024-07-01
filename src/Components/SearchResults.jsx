@@ -32,7 +32,7 @@ const SearchResults = () => {
 
   if (loading) return <Spinner />;
 
-  if (results.length === 0)
+  if (results?.organic?.length === 0)
     return (
       <div className="w-full mt-8 flex items-center justify-center ">
         <h2 className="dark:text-white text-xl font-semibold  ">
