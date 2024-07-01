@@ -157,9 +157,9 @@ const SearchResults = () => {
               </h2>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 px-2 lg:px-24 py-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 px-2 lg:px-24 py-3 gap-8 overflow-x-scroll">
               {results?.videos?.map((video, index) => (
-                <div key={index} className="rounded-md flex flex-col gap-2">
+                <div key={index} className="rounded-md flex flex-col gap-2 flex-wrap">
                   <a
                     className="anch flex items-start flex-col gap-1 cursor-pointer"
                     rel="noreferrer"
@@ -174,12 +174,13 @@ const SearchResults = () => {
                       {video.title}
                     </span>
                   </a>
-                  <div className="flex items-center gap-3 ">
+                  <div className="flex items-center gap-3 flex-wrap">
                     <ReactPlayer
                       url={video.link}
                       controls
-                      width="380px"
+                      width="100%"
                       height="220px"
+                      
                       config={{
                         file: {
                           attributes: {
@@ -219,7 +220,7 @@ const SearchResults = () => {
                   target="_blank"
                   key={index}
                   rel="noreferrer"
-                  className="sm:p-3 p-5h-96"
+                  className="sm:p-3 p-5 h-96"
                 >
                   <img
                     src={image?.imageUrl}

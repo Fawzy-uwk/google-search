@@ -31,7 +31,7 @@ function Search() {
 
   return (
     <form
-      className="flex items-center w-[20rem] sm:w-[35rem] gap-2 p-3 bg-gray-200 dark:bg-white rounded-full relative"
+      className="flex items-center w-full sm:w-[35rem] gap-2 p-3 bg-gray-200 dark:bg-white rounded-full relative"
       onSubmit={handleSubmit}
     >
       <FaSearch color="gray" />

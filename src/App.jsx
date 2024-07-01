@@ -13,9 +13,9 @@ function App() {
 
   return (
     <div
-      className={darkTheme ? "dark overflow-x-hidden" : " overflow-x-hidden"}
+      className={darkTheme ? "dark  md:overflow-x-hidden h-[100dvh]" : " md:overflow-x-hidden h-[100dvh]"}
     >
-      <div className="w-screen overflow-x-hidden min-h-screen bg-slate-50 dark:bg-slate-950  ">
+      <div className="w-screen overflow-x-hidden min-h-[100dvh] bg-slate-50 dark:bg-slate-950  ">
         <BrowserRouter>
           <Header setDarkTheme={setDarkTheme} darkTheme={darkTheme} />
           <Links />
