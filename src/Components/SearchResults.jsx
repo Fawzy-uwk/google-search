@@ -17,11 +17,12 @@ const SearchResults = () => {
   useEffect(() => {
     if (query !== "" || text !== "") {
       if (location.pathname === "/videos") {
-        getResults(`/videos?q=${query}`);
+        getResults(`/videos?q=${query}&num=25`);
       } else {
-        getResults(`${location.pathname}?q=${query}&num=100`);
+        getResults(`${location.pathname}?q=${query}&num=200`);
       }
-    }
+      
+    } 
   }, [query, location.pathname, navigate, text]);
 
   const paginated = (event, value) => {
@@ -90,7 +91,7 @@ const SearchResults = () => {
       return (
         <>
           <div className="sm:px-56 flex flex-wrap justify-between items-center gap-y-6 p-2 ">
-            {results.news.length === 0 ? (
+            {results?.news?.length === 0 ? (
               <div className="w-full mt-8 flex items-center justify-center ">
                 <h2 className="dark:text-white text-xl font-semibold  ">
                   No news found
@@ -149,33 +150,55 @@ const SearchResults = () => {
     case "/videos":
       return (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-4 px-2 lg:px-24 py-3 gap-8 ">
-            {results.videos.length === 0 ? (
-              <div className="w-full mt-8 flex items-center justify-center ">
-                <h2 className="dark:text-white text-xl font-semibold  ">
-                  No Videos found
-                </h2>
-              </div>
-            ) : (
-              results?.videos?.map((video, index) => (
-                <div key={index} className="rounded-md">
-                  <ReactPlayer
-                    url={video.link}
-                    controls
-                    width="355px"
-                    height="220px"
-                    config={{
-                      file: {
-                        attributes: {
-                          sandbox: "allow-same-origin allow-scripts",
+          {results?.videos?.length === 0 ? (
+            <div className="w-full mt-8 flex items-center justify-center">
+              <h2 className="dark:text-white text-xl font-semibold">
+                No Videos found
+              </h2>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-2 px-2 lg:px-24 py-3 gap-8">
+              {results?.videos?.map((video, index) => (
+                <div key={index} className="rounded-md flex flex-col gap-2">
+                  <a
+                    className="anch flex items-start flex-col gap-1 cursor-pointer"
+                    rel="noreferrer"
+                    target="_blank"
+                    href={video.link}
+                  >
+                    <p className="text-gray-500 font-semibold text-sm">
+                      {video.link.slice(8, 23)}
+                      {`>`}watch
+                    </p>
+                    <span className="anc text-sky-500 hover:underline hover:text-sky-700 cursor-pointer">
+                      {video.title}
+                    </span>
+                  </a>
+                  <div className="flex items-center gap-3 ">
+                    <ReactPlayer
+                      url={video.link}
+                      controls
+                      width="380px"
+                      height="220px"
+                      config={{
+                        file: {
+                          attributes: {
+                            sandbox: "allow-same-origin allow-scripts",
+                          },
                         },
-                      },
-                    }}
-                  />
+                      }}
+                    />
+                    <div className="flex flex-col gap-8 items-stretch">
+                      <p className="max-w-80">{video.snippet}</p>
+                      <span className="text-sm text-gray-500 ">
+                        {video.source} . {video.channel} . {video.date}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </>
       );
 
@@ -183,7 +206,7 @@ const SearchResults = () => {
       return (
         <>
           <div className="grid lg:grid-cols-4 sm:grid-cols-2 p-4">
-            {results.images.length === 0 ? (
+            {results?.images?.length === 0 ? (
               <div className="w-full mt-8 flex items-center justify-center ">
                 <h2 className="dark:text-white text-xl font-semibold  ">
                   No news found

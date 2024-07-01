@@ -6,7 +6,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
 
 ::-webkit-scrollbar {
@@ -19,6 +18,12 @@ body {
   overflow-x: hidden;
 }
 
-.dark a,.dark p{
+.dark a,
+.dark p {
   color: white;
+}
+.anch:hover .anc {
+  text-decoration: underline;
+  --tw-text-opacity: 1;
+  color: rgb(3 105 161 / var(--tw-text-opacity)) /* #0369a1 */;
 }

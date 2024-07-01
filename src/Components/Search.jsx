@@ -2,17 +2,17 @@ import { FaSearch, FaTimes } from "react-icons/fa";
 import { useSearchContext } from "../Contexts/ResultContextProvider";
 
 import { useNavigate } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Search() {
-  const { setQuery, text, setText } = useSearchContext();
+  const { setQuery } = useSearchContext();
   const navigate = useNavigate();
+  const [text, setText] = useState(""); // Move the text state to this component
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Update localStorage and setQuery only when the form is submitted
+    setQuery(text); // Update the query only when the form is submitted
     localStorage.setItem("searchInput", text);
-    setQuery(text);
     navigate("search");
   };
 
@@ -26,10 +26,8 @@ function Search() {
     const savedQuery = localStorage.getItem("searchInput");
     if (savedQuery) {
       setText(savedQuery);
-      setQuery(savedQuery);
-     
     }
-  }, [navigate, setQuery, setText]);
+  }, []);
 
   return (
     <form
@@ -44,7 +42,7 @@ function Search() {
         id="query"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        onKeyDown={handleKeyDown} // Add the onKeyDown event handler
+        onKeyDown={handleKeyDown}
       />
       {text !== "" && (
         <button
@@ -52,7 +50,6 @@ function Search() {
           className="absolute top-4 right-4 cursor-pointer text-2xl text-gray-500"
           onClick={() => {
             setText("");
-            setQuery("");
             localStorage.removeItem("searchInput");
           }}
         >
