@@ -16,12 +16,6 @@ function Search() {
     navigate("search");
   };
 
-  const handleKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      handleSubmit(e);
-    }
-  };
-
   useEffect(() => {
     const savedQuery = localStorage.getItem("searchInput");
     if (savedQuery) {
@@ -42,7 +36,6 @@ function Search() {
         id="query"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        onKeyDown={handleKeyDown}
       />
       {text !== "" && (
         <button
